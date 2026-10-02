@@ -1,0 +1,6 @@
+{
+  "name": "tolong.in - Ekosistem Layanan Mahasiswa",
+  "description": "tolong.in: Ekosistem layanan on-demand berbasis komunitas mahasiswa di Bandung. Menolong Dengan Hati. Jasa titip, anjem, survei kos via WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

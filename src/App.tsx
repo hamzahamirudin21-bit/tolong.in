@@ -25,7 +25,7 @@ export default function App() {
   const [isOprecModalOpen, setIsOprecModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] text-[#1F1F1F] flex flex-col font-sans selection:bg-[#F2B705] selection:text-[#B71C1C]">
+    <div className="min-h-screen bg-page text-ink flex flex-col font-sans selection:bg-[#F2B705] selection:text-[#B71C1C]">
       {/* 1. Navbar (Sticky) */}
       <Navbar />
 

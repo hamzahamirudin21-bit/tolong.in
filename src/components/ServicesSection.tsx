@@ -12,9 +12,6 @@ import {
   HelpCircle,
   LucideProps,
   CheckCircle2,
-  Clock,
-  MapPin,
-  Sparkle,
   Send,
 } from 'lucide-react';
 import { SERVICES_LIST, PRICING_NOTE, WA_NUMBER, SERVICES_BG_URL } from '../data/contentData';
@@ -99,31 +96,27 @@ export const ServicesSection: React.FC = () => {
       ? SERVICES_LIST
       : SERVICES_LIST.filter((s) => s.id === selectedFilter);
 
-  const activeService = selectedFilter !== 'all' ? filteredList[0] : null;
-  const currentShowcase = activeService ? SHOWCASE_DATA[activeService.id] || SHOWCASE_DATA.jastip : null;
+  const activeService =
+    selectedFilter !== 'all'
+      ? SERVICES_LIST.find((s) => s.id === selectedFilter)
+      : null;
 
-  // Auto-typing animation for WhatsApp mockup
+  const currentShowcase = activeService ? SHOWCASE_DATA[activeService.id] : null;
+
+  // Efek simulasi ketik (typing effect) admin reply
   useEffect(() => {
     if (!currentShowcase) return;
-    
-    // Check for prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      setDisplayedReply(currentShowcase.adminReply);
-      setIsTyping(false);
-      return;
-    }
 
     setDisplayedReply('');
     setIsTyping(true);
-    let currentIndex = 0;
-    const text = currentShowcase.adminReply;
+
+    const fullText = currentShowcase.adminReply;
+    let idx = 0;
 
     const timer = setInterval(() => {
-      if (currentIndex < text.length) {
-        setDisplayedReply(text.slice(0, currentIndex + 1));
-        currentIndex++;
-      } else {
+      idx++;
+      setDisplayedReply(fullText.slice(0, idx));
+      if (idx >= fullText.length) {
         setIsTyping(false);
         clearInterval(timer);
       }
@@ -137,9 +130,9 @@ export const ServicesSection: React.FC = () => {
   };
 
   return (
-    <section id="layanan" className="relative py-16 md:py-24 bg-[#F8F9FB] border-b border-neutral-200/80 overflow-hidden">
+    <section id="layanan" className="relative py-16 md:py-24 bg-page border-b border-line overflow-hidden">
       
-      {/* Photo Latar Kampus UPI (Gedung Bumi Siliwangi / Kampus UPI) dengan Gaya Transparan + Filter */}
+      {/* Photo Latar Kampus UPI dengan Gaya Transparan + Filter */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
         <img
           src={SERVICES_BG_URL}
@@ -147,7 +140,7 @@ export const ServicesSection: React.FC = () => {
           loading="lazy"
           onError={() => setBgLoaded(false)}
           onLoad={() => setBgLoaded(true)}
-          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 dark:brightness-[.6] ${
             bgLoaded ? 'opacity-[0.12]' : 'opacity-0'
           }`}
           style={{
@@ -155,46 +148,46 @@ export const ServicesSection: React.FC = () => {
           }}
         />
         {/* Brand Overlay Tint */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB] via-[#F8F9FB]/90 to-[#F8F9FB]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-page via-page/90 to-page" />
         
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:32px_32px]" />
+        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.04] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:32px_32px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full bg-red-50 border border-red-200 text-xs font-semibold text-[#D32F2F] mb-3 shadow-2xs">
+          <div className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full bg-accent-tint border border-accent-line text-xs font-semibold text-accent mb-3 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-[#F2B705]" />
             <span>Katalog Bantuan Mahasiswa UPI Bandung</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink tracking-tight">
             Layanan Serba Ada, Tanpa Perlu Aplikasi
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-neutral-600">
+          <p className="mt-2 text-sm sm:text-base text-ink-soft">
             Dikerjakan oleh runner sesama mahasiswa UPI yang terpercaya, sopan, dan sigap membantu kebutuhan harianmu.
           </p>
         </div>
 
-        {/* Pricing Note Banner (Zero price numbers!) */}
-        <div className="max-w-3xl mx-auto mb-10 p-4 rounded-2xl bg-amber-50/90 backdrop-blur-xs border border-amber-200/80 flex items-center justify-center gap-3 text-center shadow-2xs">
-          <ShieldCheck className="w-5 h-5 text-amber-700 shrink-0" />
-          <p className="text-xs sm:text-sm font-semibold text-amber-900">
+        {/* Pricing Note Banner */}
+        <div className="max-w-3xl mx-auto mb-10 p-4 rounded-2xl bg-gold-tint backdrop-blur-xs border border-gold-line flex items-center justify-center gap-3 text-center shadow-2xs">
+          <ShieldCheck className="w-5 h-5 text-gold-ink shrink-0" />
+          <p className="text-xs sm:text-sm font-semibold text-gold-ink">
             {PRICING_NOTE}
           </p>
         </div>
 
         {/* Category Filter Tabs */}
         <div className="flex justify-center mb-10 overflow-x-auto pb-2">
-          <div className="inline-flex p-1 bg-neutral-200/80 backdrop-blur-xs rounded-full gap-1 shadow-inner">
+          <div className="inline-flex p-1 bg-neutral-200/80 dark:bg-white/10 backdrop-blur-xs rounded-full gap-1 shadow-inner border border-transparent dark:border-line">
             <button
               type="button"
               onClick={() => setSelectedFilter('all')}
               className={`py-2 px-4 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                 selectedFilter === 'all'
                   ? 'bg-[#E53935] text-white shadow-sm'
-                  : 'text-neutral-700 hover:text-neutral-900'
+                  : 'text-neutral-700 dark:text-ink-soft hover:text-neutral-900 dark:hover:text-ink'
               }`}
             >
               Semua Layanan (5)
@@ -207,7 +200,7 @@ export const ServicesSection: React.FC = () => {
                 className={`py-2 px-4 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                   selectedFilter === svc.id
                     ? 'bg-[#E53935] text-white shadow-sm'
-                    : 'text-neutral-700 hover:text-neutral-900'
+                    : 'text-neutral-700 dark:text-ink-soft hover:text-neutral-900 dark:hover:text-ink'
                 }`}
               >
                 {svc.name}
@@ -227,7 +220,7 @@ export const ServicesSection: React.FC = () => {
                   const Icon = ICON_MAP[activeService.iconName] || HelpCircle;
                   const IllustrationComp = ILLUSTRATION_MAP[activeService.illustration] || JastipIllustration;
                   return (
-                    <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-[#D32F2F]/30 shadow-xl flex flex-col justify-between group overflow-hidden relative">
+                    <div className="bg-surface rounded-3xl p-6 sm:p-7 border-2 border-accent/30 dark:border-accent-line shadow-xl dark:shadow-none flex flex-col justify-between group overflow-hidden relative">
                       {/* Active Tag */}
                       <div className="absolute top-4 left-4 z-20">
                         <span className="text-[11px] font-bold text-white bg-[#E53935] py-1 px-3 rounded-full shadow-xs flex items-center gap-1.5">
@@ -238,36 +231,36 @@ export const ServicesSection: React.FC = () => {
 
                       <div>
                         {/* Top 160px Illustration Header */}
-                        <div className="w-full h-[160px] rounded-2xl overflow-hidden mb-5 border border-neutral-100 relative bg-neutral-50 shadow-inner mt-6">
+                        <div className="w-full h-[160px] rounded-2xl overflow-hidden mb-5 border border-line relative bg-surface-2 shadow-inner mt-6">
                           <IllustrationComp className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                           <div className="absolute top-3 right-3 z-10">
-                            <span className="text-[10px] font-bold text-[#B71C1C] bg-white/95 backdrop-blur-xs border border-red-200/80 py-1 px-2.5 rounded-full shadow-xs">
+                            <span className="text-[10px] font-bold text-[#B71C1C] dark:text-accent bg-surface/95 backdrop-blur-xs border border-accent-line py-1 px-2.5 rounded-full shadow-xs">
                               {activeService.tagline}
                             </span>
                           </div>
-                          <div className="absolute bottom-2.5 left-3 z-10 w-9 h-9 rounded-xl bg-white/95 backdrop-blur-xs text-[#D32F2F] flex items-center justify-center shadow-md border border-neutral-200/70">
+                          <div className="absolute bottom-2.5 left-3 z-10 w-9 h-9 rounded-xl bg-surface/95 backdrop-blur-xs text-accent flex items-center justify-center shadow-md border border-line">
                             <Icon className="w-4.5 h-4.5" />
                           </div>
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">
+                        <h3 className="text-xl sm:text-2xl font-bold text-ink mb-2">
                           {activeService.name}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-5">
+                        <p className="text-xs sm:text-sm text-ink-soft leading-relaxed mb-5">
                           {activeService.desc}
                         </p>
 
                         {/* Examples Checklist */}
-                        <div className="space-y-2.5 pt-4 border-t border-neutral-100 mb-6">
-                          <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400 block mb-1">
+                        <div className="space-y-2.5 pt-4 border-t border-line mb-6">
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-ink-muted block mb-1">
                             Contoh yang Sering Dibantu:
                           </span>
                           {activeService.examples.map((ex, exIdx) => (
-                            <div key={exIdx} className="flex items-start gap-2.5 text-xs text-neutral-700">
-                              <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                            <div key={exIdx} className="flex items-start gap-2.5 text-xs text-ink-soft">
+                              <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                               <span className="leading-snug">{ex}</span>
                             </div>
                           ))}
@@ -293,30 +286,30 @@ export const ServicesSection: React.FC = () => {
               </div>
 
               {/* Kolom Kanan: PANEL SHOWCASE (7 Cols di Desktop) */}
-              <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-neutral-200/80 shadow-lg space-y-6">
+              <div className="lg:col-span-7 bg-surface rounded-3xl p-6 sm:p-8 border border-line shadow-lg dark:shadow-none space-y-6">
                 
                 {/* Header Showcase: Badge & Highlight */}
-                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-neutral-100">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-line">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#F2B705] shadow-xs" />
-                    <span className="text-xs font-bold text-neutral-900 uppercase tracking-wide">
+                    <span className="text-xs font-bold text-ink uppercase tracking-wide">
                       Showcase Interaktif: {activeService.name}
                     </span>
                   </div>
-                  <span className="text-xs font-bold text-[#D32F2F] bg-red-50 border border-red-200 py-1 px-3 rounded-full">
+                  <span className="text-xs font-bold text-accent bg-accent-tint border border-accent-line py-1 px-3 rounded-full">
                     {currentShowcase.highlightBadge}
                   </span>
                 </div>
 
-                {/* A. Ilustrasi SVG Beranimasi Besar (Detailed 500x360) */}
-                <div className="w-full h-[220px] sm:h-[260px] rounded-2xl overflow-hidden border border-neutral-100 relative bg-gradient-to-br from-[#FFF9EB] via-[#FDECEC] to-white shadow-inner flex items-center justify-center p-2">
+                {/* A. Ilustrasi SVG Beranimasi Besar */}
+                <div className="w-full h-[220px] sm:h-[260px] rounded-2xl overflow-hidden border border-line relative bg-gradient-to-br from-[#FFF9EB] via-[#FDECEC] to-white dark:from-[#262017] dark:via-[#241718] dark:to-[#1C1819] shadow-inner flex items-center justify-center p-2">
                   {(() => {
                     const DetailedComp = ILLUSTRATION_MAP[activeService.illustration] || JastipIllustration;
                     return (
                       <div className="w-full h-full relative flex items-center justify-center">
                         <DetailedComp detailed={true} className="w-full h-full object-contain drop-shadow-sm" />
                         {/* Pulsing Pin / Marker indicator */}
-                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-xs py-1.5 px-3 rounded-full shadow-md border border-neutral-100 flex items-center gap-2 text-xs font-semibold text-neutral-800">
+                        <div className="absolute top-4 right-4 bg-surface/95 backdrop-blur-xs py-1.5 px-3 rounded-full shadow-md border border-line flex items-center gap-2 text-xs font-semibold text-ink">
                           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                           <span>Runner Siap di UPI</span>
                         </div>
@@ -326,37 +319,37 @@ export const ServicesSection: React.FC = () => {
                 </div>
 
                 {/* B. Mockup Bubble Chat WhatsApp dengan Typing Effect */}
-                <div className="rounded-2xl bg-[#EFEAE2] p-4 sm:p-5 border border-[#DDD6CC] space-y-3.5 shadow-inner">
-                  <div className="flex items-center justify-between text-[11px] text-neutral-600 font-medium px-1">
+                <div className="rounded-2xl bg-[#EFEAE2] dark:bg-wa-canvas p-4 sm:p-5 border border-[#DDD6CC] dark:border-line space-y-3.5 shadow-inner">
+                  <div className="flex items-center justify-between text-[11px] text-neutral-600 dark:text-ink-muted font-medium px-1">
                     <div className="flex items-center gap-1.5">
                       <div className="w-2 h-2 rounded-full bg-emerald-500" />
                       <span>Simulasi Chat Langsung Admin Tolong.in</span>
                     </div>
-                    <span className="text-neutral-500">WhatsApp Official</span>
+                    <span className="text-neutral-500 dark:text-ink-muted">WhatsApp Official</span>
                   </div>
 
-                  {/* Customer Chat Bubble (Green, Right-aligned) */}
+                  {/* Customer Chat Bubble (Right-aligned) */}
                   <div className="flex justify-end">
-                    <div className="bg-[#E7FFDB] text-neutral-900 rounded-2xl rounded-tr-xs p-3 sm:p-3.5 max-w-[85%] text-xs sm:text-sm shadow-xs border border-[#CDEEB7] leading-relaxed">
+                    <div className="bg-[#E7FFDB] dark:bg-[#005C4B] text-neutral-900 dark:text-wa-ink rounded-2xl rounded-tr-xs p-3 sm:p-3.5 max-w-[85%] text-xs sm:text-sm shadow-xs border border-[#CDEEB7] dark:border-transparent leading-relaxed">
                       <p className="font-sans">{currentShowcase.customerMsg}</p>
-                      <div className="text-right text-[10px] text-neutral-500 mt-1 flex items-center justify-end gap-1">
+                      <div className="text-right text-[10px] text-neutral-500 dark:text-emerald-200/80 mt-1 flex items-center justify-end gap-1">
                         <span>14.02</span>
                         <span className="text-[#34B7F1]">✓✓</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Admin Reply Bubble with Live Typing Effect (White, Left-aligned) */}
+                  {/* Admin Reply Bubble with Live Typing Effect (Left-aligned) */}
                   <div className="flex justify-start">
-                    <div className="bg-white text-neutral-900 rounded-2xl rounded-tl-xs p-3 sm:p-3.5 max-w-[85%] text-xs sm:text-sm shadow-xs border border-neutral-200/80 leading-relaxed">
-                      <div className="font-bold text-[11px] text-[#D32F2F] mb-0.5">Admin Tolong.in UPI</div>
+                    <div className="bg-white dark:bg-wa-bubble text-neutral-900 dark:text-wa-ink rounded-2xl rounded-tl-xs p-3 sm:p-3.5 max-w-[85%] text-xs sm:text-sm shadow-xs border border-neutral-200/80 dark:border-line leading-relaxed">
+                      <div className="font-bold text-[11px] text-accent mb-0.5">Admin Tolong.in UPI</div>
                       <p className="font-sans inline">
                         {displayedReply}
                         {isTyping && (
-                          <span className="inline-block w-1.5 h-3.5 bg-[#D32F2F] ml-1 animate-pulse align-middle" />
+                          <span className="inline-block w-1.5 h-3.5 bg-accent ml-1 animate-pulse align-middle" />
                         )}
                       </p>
-                      <div className="text-right text-[10px] text-neutral-400 mt-1">
+                      <div className="text-right text-[10px] text-neutral-400 dark:text-ink-muted mt-1">
                         14.03
                       </div>
                     </div>
@@ -368,18 +361,18 @@ export const ServicesSection: React.FC = () => {
                   {currentShowcase.chips.map((chip, cIdx) => (
                     <div
                       key={cIdx}
-                      className="bg-[#F8F9FB] rounded-xl p-3 border border-neutral-200/80 flex items-center gap-2.5 text-xs font-semibold text-neutral-800 shadow-2xs"
+                      className="bg-page rounded-xl p-3 border border-line flex items-center gap-2.5 text-xs font-semibold text-ink shadow-2xs"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-[#D32F2F] shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
                       <span className="leading-snug">{chip}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Direct Action Prompt */}
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-red-50 to-amber-50 p-4 rounded-2xl border border-red-100">
-                  <div className="text-xs text-neutral-700">
-                    <span className="font-bold text-neutral-900 block">Ingin pesan layanan ini sekarang?</span>
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-red-50 to-amber-50 dark:from-accent-tint dark:to-gold-tint p-4 rounded-2xl border border-accent-line">
+                  <div className="text-xs text-ink-soft">
+                    <span className="font-bold text-ink block">Ingin pesan layanan ini sekarang?</span>
                     Admin standby membalas dalam hitungan menit tanpa bot kaku.
                   </div>
                   <a
@@ -406,44 +399,44 @@ export const ServicesSection: React.FC = () => {
               return (
                 <div
                   key={svc.id}
-                  className="bg-white rounded-3xl p-5 sm:p-6 border border-neutral-200/80 hover:border-[#D32F2F]/40 shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
+                  className="bg-surface rounded-3xl p-5 sm:p-6 border border-line hover:border-accent/40 shadow-xs dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden"
                 >
                   <div>
                     {/* Top 150px Illustration Header */}
-                    <div className="w-full h-[150px] rounded-2xl overflow-hidden mb-5 border border-neutral-100 relative bg-neutral-50 shadow-inner">
+                    <div className="w-full h-[150px] rounded-2xl overflow-hidden mb-5 border border-line relative bg-surface-2 shadow-inner">
                       <IllustrationComp className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                       
                       {/* Tagline Pill (Top Right) */}
                       <div className="absolute top-3 right-3 z-10">
-                        <span className="text-[10px] font-bold text-[#B71C1C] bg-white/95 backdrop-blur-xs border border-red-200/80 py-1 px-2.5 rounded-full shadow-xs">
+                        <span className="text-[10px] font-bold text-[#B71C1C] dark:text-accent bg-surface/95 backdrop-blur-xs border border-accent-line py-1 px-2.5 rounded-full shadow-xs">
                           {svc.tagline}
                         </span>
                       </div>
 
                       {/* Service Icon Badge (Bottom Left) */}
-                      <div className="absolute bottom-2.5 left-3 z-10 w-9 h-9 rounded-xl bg-white/95 backdrop-blur-xs text-[#D32F2F] flex items-center justify-center shadow-md border border-neutral-200/70 group-hover:bg-[#E53935] group-hover:text-white transition-colors">
+                      <div className="absolute bottom-2.5 left-3 z-10 w-9 h-9 rounded-xl bg-surface/95 backdrop-blur-xs text-accent flex items-center justify-center shadow-md border border-line group-hover:bg-[#E53935] group-hover:text-white transition-colors">
                         <Icon className="w-4.5 h-4.5" />
                       </div>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 group-hover:text-[#D32F2F] transition-colors mb-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-accent transition-colors mb-2">
                       {svc.name}
                     </h3>
 
                     {/* One-Sentence Description */}
-                    <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed mb-5">
+                    <p className="text-xs sm:text-sm text-ink-soft leading-relaxed mb-5">
                       {svc.desc}
                     </p>
 
                     {/* Examples Checklist */}
-                    <div className="space-y-2 pt-4 border-t border-neutral-100 mb-6">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400 block mb-1">
+                    <div className="space-y-2 pt-4 border-t border-line mb-6">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-ink-muted block mb-1">
                         Contoh yang Sering Dibantu:
                       </span>
                       {svc.examples.map((ex, exIdx) => (
-                        <div key={exIdx} className="flex items-start gap-2 text-xs text-neutral-700">
-                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <div key={exIdx} className="flex items-start gap-2 text-xs text-ink-soft">
+                          <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                           <span className="leading-snug">{ex}</span>
                         </div>
                       ))}
@@ -456,11 +449,11 @@ export const ServicesSection: React.FC = () => {
                       href={getWaLink(svc.waTemplate)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3 px-4 rounded-full bg-neutral-900 group-hover:bg-[#E53935] text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98"
+                      className="w-full py-3 px-4 rounded-full bg-neutral-900 dark:bg-surface-2 dark:border dark:border-line group-hover:bg-[#E53935] text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98"
                     >
                       <MessageCircle className="w-4 h-4 fill-white" />
                       <span>Pesan Layanan Ini via WA</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-4 h-4" />
                     </a>
                   </div>
                 </div>
@@ -471,10 +464,10 @@ export const ServicesSection: React.FC = () => {
 
         {/* Quick Anchor Link to Quick Order Form */}
         <div className="mt-12 text-center">
-          <p className="text-xs text-neutral-500 mb-2">Mau menyusun rincian pesananmu lebih rapi dulu?</p>
+          <p className="text-xs text-ink-muted mb-2">Mau menyusun rincian pesananmu lebih rapi dulu?</p>
           <a
             href="#form-pesan"
-            className="inline-flex items-center gap-2 py-2 px-5 rounded-full border border-neutral-300 hover:border-[#D32F2F] text-neutral-700 hover:text-[#D32F2F] text-xs font-semibold bg-white transition-colors shadow-2xs"
+            className="inline-flex items-center gap-2 py-2 px-5 rounded-full border border-line-strong hover:border-accent text-ink hover:text-accent text-xs font-semibold bg-surface transition-colors shadow-2xs"
           >
             <span>Buka Form Pemesanan Tolong.in di Bawah</span>
             <span>↓</span>

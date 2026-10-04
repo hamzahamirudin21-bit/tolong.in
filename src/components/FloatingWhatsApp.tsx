@@ -12,7 +12,7 @@ export const FloatingWhatsApp: React.FC = () => {
         href={WA_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white py-3 px-4 sm:px-5 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold text-xs sm:text-sm active:scale-95 border-2 border-white"
+        className="flex items-center gap-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white py-3 px-4 sm:px-5 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold text-xs sm:text-sm active:scale-95 border-2 border-white dark:border-line-strong"
         aria-label="Hubungi Admin Tolong.in di WhatsApp"
       >
         <span className="relative flex h-3 w-3">

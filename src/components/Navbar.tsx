@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Heart, ArrowUpRight } from 'lucide-react';
 import { TolongInLogo } from './TolongInLogo';
 import { WhatsAppIcon } from './icons/BrandIcons';
+import { ThemeToggle } from './ThemeToggle';
 import { WA_LINK, WA_DISPLAY, BRAND_TAGLINE } from '../data/contentData';
 
 export const Navbar: React.FC = () => {
@@ -37,7 +38,7 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-200/80 py-2.5 text-neutral-800'
+          ? 'bg-surface/90 backdrop-blur-md shadow-sm border-b border-line py-2.5 text-ink'
           : 'bg-[#E53935]/95 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none border-b border-white/10 py-3.5 text-white'
       }`}
     >
@@ -57,18 +58,18 @@ export const Navbar: React.FC = () => {
             <span
               className={`hidden xl:inline-block text-[11px] font-medium pl-2 border-l transition-colors ${
                 isScrolled
-                  ? 'text-neutral-500 border-neutral-200'
+                  ? 'text-ink-muted border-line'
                   : 'text-white/80 border-white/20'
               }`}
             >
-              UPI Bandung · <span className={isScrolled ? 'text-[#D32F2F] font-semibold' : 'text-[#F2B705] font-semibold'}>{BRAND_TAGLINE}</span>
+              UPI Bandung · <span className={isScrolled ? 'text-accent font-semibold' : 'text-[#F2B705] font-semibold'}>{BRAND_TAGLINE}</span>
             </span>
           </a>
 
           {/* Center: Desktop Navigation Anchor Links */}
           <nav
             className={`hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium transition-colors ${
-              isScrolled ? 'text-neutral-700' : 'text-white/90'
+              isScrolled ? 'text-ink' : 'text-white/90'
             }`}
           >
             {navLinks.map((link) => (
@@ -81,7 +82,7 @@ export const Navbar: React.FC = () => {
                 }}
                 className={`transition-colors relative py-1 hover:underline underline-offset-4 ${
                   isScrolled
-                    ? 'hover:text-[#D32F2F] decoration-[#D32F2F]'
+                    ? 'hover:text-accent decoration-accent'
                     : 'hover:text-white decoration-[#F2B705]'
                 }`}
               >
@@ -90,8 +91,9 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right Action: Pill Button Pesan via WhatsApp */}
+          {/* Right Action: ThemeToggle & Pill Button Pesan via WhatsApp */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle variant="navbar" onHero={!isScrolled} />
             <a
               href={WA_LINK}
               target="_blank"
@@ -110,8 +112,10 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile Right: Hamburger Toggle */}
+          {/* Mobile Right: ThemeToggle, WA, & Hamburger Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle variant="navbar" onHero={!isScrolled} />
+
             <a
               href={WA_LINK}
               target="_blank"
@@ -132,9 +136,9 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-xl transition-colors ${
+              className={`p-2 rounded-xl transition-colors cursor-pointer ${
                 isScrolled
-                  ? 'text-neutral-700 hover:bg-neutral-100'
+                  ? 'text-ink hover:bg-surface-2'
                   : 'text-white hover:bg-white/10'
               }`}
               aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
@@ -147,15 +151,23 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[60px] z-50 bg-white text-neutral-900 overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl">
+        <div className="lg:hidden fixed inset-0 top-[60px] z-50 bg-surface text-ink overflow-y-auto animate-in slide-in-from-top-2 duration-200 shadow-2xl border-b border-line">
           <div className="px-5 py-6 space-y-4 pb-24">
-            <div className="p-4 rounded-2xl bg-[#FDECEC] border border-red-100 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#D32F2F] shrink-0 shadow-xs">
-                <Heart className="w-5 h-5 fill-[#D32F2F]" />
+            {/* Tampilan Theme Toggle Segment */}
+            <div className="space-y-1.5">
+              <span className="text-[11px] font-bold text-ink-muted uppercase tracking-wider px-1">
+                Tampilan
+              </span>
+              <ThemeToggle variant="menu" />
+            </div>
+
+            <div className="p-4 rounded-2xl bg-accent-tint border border-accent-line flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-accent shrink-0 shadow-xs">
+                <Heart className="w-5 h-5 fill-current" />
               </div>
               <div>
-                <span className="text-xs font-bold text-[#B71C1C] block">Menolong Dengan Hati.</span>
-                <span className="text-[11px] text-neutral-600">Komunitas Bantuan Mahasiswa UPI</span>
+                <span className="text-xs font-bold text-accent block">Menolong Dengan Hati.</span>
+                <span className="text-[11px] text-ink-soft">Komunitas Bantuan Mahasiswa UPI</span>
               </div>
             </div>
 
@@ -164,15 +176,15 @@ export const Navbar: React.FC = () => {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2.5"
+              className="w-full py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
             >
               <WhatsAppIcon size={20} className="fill-white" />
               <span>Pesan Sekarang via WhatsApp</span>
             </a>
 
             {/* Navigation links */}
-            <div className="border-t border-neutral-100 pt-3 space-y-1">
-              <div className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider px-2 py-1">
+            <div className="border-t border-line pt-3 space-y-1">
+              <div className="text-[11px] font-bold text-ink-muted uppercase tracking-wider px-2 py-1">
                 Navigasi Halaman
               </div>
               {navLinks.map((link) => (
@@ -183,17 +195,17 @@ export const Navbar: React.FC = () => {
                     e.preventDefault();
                     handleLinkClick(link.href);
                   }}
-                  className="w-full text-left py-2.5 px-3 rounded-xl text-sm font-semibold text-neutral-800 hover:text-[#D32F2F] hover:bg-neutral-50 flex items-center justify-between"
+                  className="w-full text-left py-2.5 px-3 rounded-xl text-sm font-semibold text-ink hover:text-accent hover:bg-surface-2 flex items-center justify-between"
                 >
                   <span>{link.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-neutral-300" />
+                  <ArrowUpRight className="w-4 h-4 text-ink-muted" />
                 </a>
               ))}
             </div>
 
-            <div className="pt-4 border-t border-neutral-100 text-xs text-neutral-500 space-y-1">
-              <p>Hotline WhatsApp: <strong className="text-neutral-800">{WA_DISPLAY}</strong></p>
-              <p>Instagram & TikTok: <strong className="text-neutral-800">@upi.tolong</strong></p>
+            <div className="pt-4 border-t border-line text-xs text-ink-muted space-y-1">
+              <p>Hotline WhatsApp: <strong className="text-ink">{WA_DISPLAY}</strong></p>
+              <p>Instagram & TikTok: <strong className="text-ink">@upi.tolong</strong></p>
             </div>
           </div>
         </div>

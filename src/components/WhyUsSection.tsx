@@ -124,7 +124,7 @@ const BentoSpotlightCard: React.FC<{
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative rounded-3xl p-6 sm:p-7 border border-neutral-200/90 bg-white shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 ${className}`}
+      className={`relative rounded-3xl p-6 sm:p-7 border border-line bg-surface shadow-xs dark:shadow-none hover:shadow-xl dark:hover:shadow-none transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1 ${className}`}
     >
       {/* Spotlight Radial Gradient on Cursor */}
       <div
@@ -139,36 +139,36 @@ const BentoSpotlightCard: React.FC<{
       <div>
         {/* Top bar with Badge / Metric */}
         <div className="flex items-center justify-between gap-2 mb-4">
-          <div className="p-2 rounded-2xl bg-[#F8F9FB] border border-neutral-100 group-hover:scale-110 transition-transform">
+          <div className="p-2 rounded-2xl bg-surface-2 border border-line group-hover:scale-110 transition-transform">
             {icon}
           </div>
           {badge && (
-            <span className="text-[10px] font-bold text-[#D32F2F] bg-red-50 border border-red-200 py-1 px-3 rounded-full">
+            <span className="text-[10px] font-bold text-accent bg-accent-tint border border-accent-line py-1 px-3 rounded-full">
               {badge}
             </span>
           )}
           {numberMetric && (
             <div className="text-right">
-              <span className="text-xl sm:text-2xl font-black text-[#D32F2F] tracking-tight block leading-none">
+              <span className="text-xl sm:text-2xl font-black text-accent tracking-tight block leading-none">
                 {numberMetric}
               </span>
-              <span className="text-[10px] text-neutral-400 font-semibold">{metricLabel}</span>
+              <span className="text-[10px] text-ink-muted font-semibold">{metricLabel}</span>
             </div>
           )}
         </div>
 
         {/* Title */}
-        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 group-hover:text-[#D32F2F] transition-colors mb-2">
+        <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-accent transition-colors mb-2">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+        <p className="text-xs sm:text-sm text-ink-soft leading-relaxed">
           {desc}
         </p>
       </div>
 
-      <div className="pt-4 mt-4 border-t border-neutral-100 flex items-center justify-between text-[11px] font-semibold text-neutral-400">
+      <div className="pt-4 mt-4 border-t border-line flex items-center justify-between text-[11px] font-semibold text-ink-muted">
         <span>Prinsip Layanan Tolong.in</span>
         <span className="w-1.5 h-1.5 rounded-full bg-[#F2B705] group-hover:scale-150 transition-transform" />
       </div>
@@ -218,19 +218,19 @@ export const WhyUsSection: React.FC = () => {
   };
 
   return (
-    <section id="kenapa-kami" className="py-16 md:py-24 bg-white border-b border-neutral-200/80">
+    <section id="kenapa-kami" className="py-16 md:py-24 bg-surface border-b border-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full bg-red-50 border border-red-200 text-xs font-semibold text-[#D32F2F] mb-3 shadow-2xs">
+          <div className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full bg-accent-tint border border-accent-line text-xs font-semibold text-accent mb-3 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-[#F2B705]" />
             <span>Alasan Memilih Kami</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink tracking-tight">
             Kenapa Mahasiswa Memilih Tolong.in?
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-neutral-600">
+          <p className="mt-2 text-sm sm:text-base text-ink-soft">
             Didesain khusus untuk ritme kehidupan kampus: fleksibel, transparan, dan mengedepankan etika pelayanan.
           </p>
         </div>
@@ -240,7 +240,7 @@ export const WhyUsSection: React.FC = () => {
           
           {/* Card 1: Col-Span-2 (Hero card on desktop) */}
           <BentoSpotlightCard
-            className="md:col-span-2 bg-gradient-to-br from-white via-white to-red-50/40"
+            className="md:col-span-2 bg-gradient-to-br from-surface via-surface to-accent-tint/30"
             badge="100% Mahasiswa UPI"
             numberMetric="100%"
             metricLabel="Runner Terverifikasi"
@@ -288,7 +288,7 @@ export const WhyUsSection: React.FC = () => {
 
           {/* Card 6: Col-Span-3 or Full Width */}
           <BentoSpotlightCard
-            className="md:col-span-3 bg-gradient-to-r from-white via-[#FFF9EB]/40 to-white"
+            className="md:col-span-3 bg-gradient-to-r from-surface via-gold-tint/20 to-surface"
             badge="Navigasi Runner Cepat"
             icon={<MiniMapPinSvg />}
             title="Paham Seluk-Beluk Kampus UPI & Jalur Tikus"
@@ -298,7 +298,7 @@ export const WhyUsSection: React.FC = () => {
         </div>
 
         {/* TUGAS 5c: BLOK INTERAKTIF "3 KATA AJAIB DALAM SETIAP PELAYANAN" (DARK SECTION WITH AMBIENT PARTICLES & SIMULATION FLIP) */}
-        <div className="bg-gradient-to-br from-[#1E1E1E] via-[#2B0A0A] to-[#141414] rounded-3xl p-7 sm:p-10 lg:p-12 text-white shadow-2xl relative overflow-hidden border border-white/10">
+        <div className="bg-gradient-to-br from-[#1E1E1E] via-[#2B0A0A] to-[#141414] dark:from-[#181213] dark:via-[#220B0B] dark:to-[#120F10] rounded-3xl p-7 sm:p-10 lg:p-12 text-white shadow-2xl relative overflow-hidden border border-white/10">
           
           {/* Ambient Particles & Pulsing Glow */}
           <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">

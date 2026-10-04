@@ -49,7 +49,7 @@ export const TRUST_STATS = [
     value: 78,
     suffix: '',
     label: 'Pesanan Terlayani',
-    period: 'Juli 2026', // TODO: Verifikasi sebelum publikasi
+    period: 'Sejak fase pilot', // TODO: Verifikasi angka riil sebelum publikasi
     note: 'Terus bertambah setiap pekan',
   },
   {
@@ -57,7 +57,7 @@ export const TRUST_STATS = [
     value: 18,
     suffix: '',
     label: 'Runner Mahasiswa',
-    period: 'Aktif di Kampus', // TODO: Verifikasi sebelum publikasi
+    period: 'Sejak fase pilot', // TODO: Verifikasi angka riil sebelum publikasi
     note: 'Tersebar di berbagai fakultas UPI',
   },
   {
@@ -65,7 +65,7 @@ export const TRUST_STATS = [
     value: 2500,
     suffix: '+',
     label: 'Pengikut Komunitas',
-    period: 'Instagram & TikTok', // TODO: Verifikasi sebelum publikasi
+    period: 'Sejak fase pilot', // TODO: Verifikasi angka riil sebelum publikasi
     note: '@upi.tolong & ekosistem kampus',
   },
   {
@@ -74,7 +74,7 @@ export const TRUST_STATS = [
     prefix: '±',
     suffix: '%',
     label: 'Pelanggan Order Ulang',
-    period: 'Repeat Order Rate', // TODO: Verifikasi sebelum publikasi
+    period: 'Sejak fase pilot', // TODO: Verifikasi angka riil sebelum publikasi
     note: 'Tingkat kepuasan & kepercayaan tinggi',
   },
 ];
@@ -278,7 +278,7 @@ export const HOW_IT_WORKS_STEPS = [
   {
     step: 5,
     title: 'Bayar Aman Selesai Tugas',
-    desc: 'Bayar setelah bantuan selesai lewat QRIS (sangat disarankan) atau tunai. Demi keamanan, jangan transfer ke rekening pribadi runner.',
+    desc: 'Bayar setelah bantuan selesai via QRIS, uang tunai, atau transfer langsung ke runner.',
     iconName: 'QrCode',
   },
   {
@@ -293,7 +293,7 @@ export const TIMEOUT_CALLOUT =
   'Kalau belum ada runner yang bisa ambil dalam ±15 menit, admin akan segera menghubungimu untuk konfirmasi apakah ingin ditunda atau dibatalkan tanpa penalti.';
 
 // ----------------------------------------------------------------------------
-// Kenapa Tolong.in (6 Poin Utama + 3 Kata Ajaib)
+// Kenapa tolong.in (6 Poin Utama + 3 Kata Ajaib)
 // ----------------------------------------------------------------------------
 export const WHY_US_POINTS = [
   {
@@ -312,8 +312,8 @@ export const WHY_US_POINTS = [
     iconName: 'ShieldCheck',
   },
   {
-    title: 'Pembayaran Aman (QRIS/Tunai)',
-    desc: 'Bayar setelah pekerjaan tuntas. Mendukung QRIS resmi dan uang tunai tanpa risiko rekening liar.',
+    title: 'Pembayaran Fleksibel (QRIS/Tunai/Transfer)',
+    desc: 'Bayar setelah pekerjaan tuntas. Mendukung QRIS, transfer langsung ke runner, atau uang tunai tanpa ribet.',
     iconName: 'Wallet',
   },
   {
@@ -431,6 +431,10 @@ export const ROADMAP_STAGES = [
 // ----------------------------------------------------------------------------
 // Bergabung Jadi Runner / Staf
 // ----------------------------------------------------------------------------
+// Status pendaftaran Open Recruitment runner / staf
+// Mengubah nilai ini ke true akan mengaktifkan kembali formulir pendaftaran
+export const OPREC_OPEN = false;
+
 export const RUNNER_BENEFITS = [
   {
     title: 'Penghasilan Fleksibel',
@@ -454,29 +458,15 @@ export const RUNNER_BENEFITS = [
   },
 ];
 
-export const OPREC_TIMELINE = [
-  { step: '01', title: 'Isi Formulir Daring', desc: 'Isi data diri dan minat peran melalui form open recruitment berkala.' },
-  { step: '02', title: 'Seleksi Administrasi', desc: 'Verifikasi status mahasiswa aktif dan komitmen waktu.' },
-  { step: '03', title: 'Pengumuman Hasil', desc: 'Pemberitahuan calon terpilih via WhatsApp resmi tolong.in.' },
-  { step: '04', title: 'Internship 1 Bulan', desc: 'Pembekalan SOP pelayanan prima, etika kerja, dan pendampingan di lapangan.' },
-  { step: '05', title: 'Inaugurasi Staf', desc: 'Resmi menjadi bagian keluarga besar tolong.in dan siap menjalankan tugas.' },
-];
-
-export const CAREER_LADDER = [
-  { title: 'Intern', desc: 'Masa pembelajaran 1 bulan, memahami SOP & kultur pelayanan' },
-  { title: 'Staf', desc: 'Menjadi runner aktif atau staf pendukung operasional harian' },
-  { title: 'Koordinator Bidang', desc: 'Memimpin subbagian logistik, operasional, atau relasi mitra' },
-  { title: 'Direktur', desc: 'Menentukan arah strategis pengembangan ekosistem tolong.in' },
-];
-
 // ----------------------------------------------------------------------------
 // Testimoni Pengguna
-// // TODO: Minta izin pelanggan sebelum publikasi
+// TODO: Ganti dengan nama pelanggan asli yang sudah memberi izin sebelum publikasi.
 // ----------------------------------------------------------------------------
 export const TESTIMONIALS = [
   {
     id: 'testi-1',
-    name: 'A.',
+    name: 'Aisyah Nuraini',
+    initials: 'AN',
     role: 'Pelanggan UPI',
     service: 'Jasa Titip Makanan',
     quote: 'Pesanan selalu sampai, admin fast respon, tim lapangannya gercep semua.',
@@ -484,7 +474,8 @@ export const TESTIMONIALS = [
   },
   {
     id: 'testi-2',
-    name: 'Pelanggan UPI',
+    name: 'Salsabila Rahmawati',
+    initials: 'SR',
     role: 'Mahasiswi Rantau',
     service: 'Antar Keliling Bandung',
     quote: 'Runnernya komunikatif, tahu tujuan dan jalan, bahkan mau dengerin curhat. Top deh!',
@@ -492,12 +483,54 @@ export const TESTIMONIALS = [
   },
   {
     id: 'testi-3',
-    name: 'A.Z.',
+    name: 'Aulia Zahra Putri',
+    initials: 'AZ',
     role: 'Mahasiswa UPI',
     service: 'Informasi Administrasi UKT',
     quote: 'Ngebantu banget, bener-bener nggak ada obat!',
     stars: 5,
   },
+];
+
+// ----------------------------------------------------------------------------
+// Mitra Kampus & Komunitas (Marquee Slider)
+// ----------------------------------------------------------------------------
+export interface PartnerLogo {
+  id: string;
+  name: string;
+  slug?: string;     // slug Simple Icons
+  logoUrl?: string;  // URL logo langsung; menang atas slug
+}
+
+export const PARTNER_LOGOS: PartnerLogo[] = [
+  // Sumber 1: Simple Icons CDN (https://cdn.simpleicons.org/nvidia)
+  { id: 'nvidia', name: 'NVIDIA', slug: 'nvidia' },
+
+  // Sumber 2: Simple Icons CDN (https://cdn.simpleicons.org/intel)
+  { id: 'intel', name: 'Intel', slug: 'intel' },
+
+  // Sumber 3: Wikimedia Commons SVG resmi (karena Simple Icons CDN menghasilkan 404)
+  {
+    id: 'microsoft',
+    name: 'Microsoft',
+    slug: 'microsoft',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg',
+  },
+
+  // Sumber 4: Simple Icons CDN (https://cdn.simpleicons.org/amd)
+  { id: 'amd-ryzen', name: 'AMD Ryzen', slug: 'amd' },
+
+  // Sumber 5: Simple Icons CDN (https://cdn.simpleicons.org/lenovo)
+  { id: 'lenovo', name: 'Lenovo', slug: 'lenovo' },
+
+  // Sumber 6: Simple Icons CDN (https://cdn.simpleicons.org/asus)
+  { id: 'asus', name: 'ASUS', slug: 'asus' },
+
+  // Sumber 7: Tidak ditemukan SVG di Simple Icons maupun Wikimedia Commons -> Fallback teks tebal
+  { id: 'axioo', name: 'Axioo' },
+
+  // Sumber 8: Simple Icons CDN (https://cdn.simpleicons.org/huawei)
+  { id: 'huawei', name: 'Huawei', slug: 'huawei' },
 ];
 
 // ----------------------------------------------------------------------------
@@ -517,7 +550,7 @@ export const FAQ_LIST = [
   {
     question: 'Bagaimana cara pembayarannya?',
     answer:
-      'Pembayaran dilakukan setelah pesanan selesai dikerjakan runner. Kamu bisa bayar via QRIS resmi (sangat disarankan demi kemudahan dan pencatatan) atau uang tunai langsung ke runner. Harap TIDAK mentransfer ke rekening pribadi runner ya!',
+      'Pembayaran dilakukan setelah pesanan selesai dikerjakan runner. Kamu bisa bayar via QRIS, uang tunai, atau transfer langsung ke runner.',
   },
   {
     question: 'Bagaimana kalau belum ada runner yang bisa ambil pesanan saya?',
@@ -537,6 +570,6 @@ export const FAQ_LIST = [
   {
     question: 'Gimana cara bergabung menjadi runner tolong.in?',
     answer:
-      'Kami rutin membuka program Open Recruitment Internship sekitar 2 bulan sekali untuk mahasiswa aktif. Kamu bisa memantau pengumuman pendaftaran di akun Instagram @upi.tolong atau menghubungi admin via WhatsApp.',
+      'Kami rutin membuka program Open Recruitment untuk mahasiswa aktif. Kamu bisa memantau pengumuman pendaftaran di akun Instagram @upi.tolong atau menghubungi admin via WhatsApp.',
   },
 ];

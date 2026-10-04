@@ -23,12 +23,12 @@ export const TrustStats: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="bg-white border-b border-neutral-200/80 py-10 sm:py-12 relative z-20 -mt-2">
+    <section ref={containerRef} className="bg-surface border-b border-line py-10 sm:py-12 relative z-20 -mt-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Subtle Section Tag */}
-        <div className="flex items-center justify-center gap-2 mb-8 text-xs font-semibold text-neutral-500">
-          <span className="w-2 h-2 rounded-full bg-[#D32F2F]" />
+        <div className="flex items-center justify-center gap-2 mb-8 text-xs font-semibold text-ink-muted">
+          <span className="w-2 h-2 rounded-full bg-accent" />
           <span>Fase Pilot · Komunitas Universitas Pendidikan Indonesia (UPI)</span>
         </div>
 
@@ -74,23 +74,23 @@ const StatCard: React.FC<StatCardProps> = ({ stat, isVisible }) => {
   }, [isVisible, stat.value]);
 
   return (
-    <div className="bg-[#F8F9FB] rounded-2xl p-5 sm:p-6 border border-neutral-200/70 text-center hover:border-[#D32F2F]/30 hover:bg-white hover:shadow-md transition-all duration-200">
+    <div className="bg-page rounded-2xl p-5 sm:p-6 border border-line text-center hover:border-accent/30 hover:bg-surface hover:shadow-md dark:hover:shadow-none transition-all duration-200">
       {/* Big Number */}
-      <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#D32F2F] tracking-tight tabular-nums flex items-center justify-center">
+      <div className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-accent tracking-tight tabular-nums flex items-center justify-center">
         {stat.prefix && <span>{stat.prefix}</span>}
         <span>{isVisible ? displayValue.toLocaleString('id-ID') : 0}</span>
         {stat.suffix && <span className="text-[#F2B705]">{stat.suffix}</span>}
       </div>
 
       {/* Label */}
-      <h3 className="text-sm font-bold text-neutral-900 mt-2">
+      <h3 className="text-sm font-bold text-ink mt-2">
         {stat.label}
       </h3>
 
       {/* Period / Note */}
-      <div className="mt-1 text-[11px] text-neutral-500 font-medium">
+      <div className="mt-1 text-[11px] text-ink-soft font-medium">
         <span>{stat.period}</span>
-        <span className="block text-[10px] text-neutral-400 mt-0.5">{stat.note}</span>
+        <span className="block text-[10px] text-ink-muted mt-0.5">{stat.note}</span>
       </div>
     </div>
   );

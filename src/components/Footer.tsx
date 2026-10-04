@@ -19,7 +19,7 @@ import {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#4A0E0E] text-white pt-16 pb-12 border-t border-[#601414]">
+    <footer className="bg-footer text-white pt-16 pb-12 border-t border-[#601414] dark:border-line">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Grid */}

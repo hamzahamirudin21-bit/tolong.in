@@ -4,9 +4,9 @@ import { WA_LINK, BRAND_TAGLINE } from '../data/contentData';
 
 export const CtaBanner: React.FC = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-[#E53935] via-[#D32F2F] to-[#B71C1C] text-white py-14 md:py-20">
+    <section className="relative overflow-hidden bg-gradient-to-r from-[#E53935] via-[#D32F2F] to-[#B71C1C] dark:from-[#9B1B1B] dark:via-[#7F1717] dark:to-[#5E1010] text-white py-14 md:py-20 border-b border-transparent dark:border-line">
       {/* Decorative background shapes */}
-      <div className="absolute inset-0 pointer-events-none opacity-10" aria-hidden="true">
+      <div className="absolute inset-0 pointer-events-none opacity-10 dark:opacity-5" aria-hidden="true">
         <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full border-8 border-white" />
         <div className="absolute -bottom-20 -right-20 w-96 h-96 rounded-full border-4 border-dashed border-[#F2B705]" />
       </div>

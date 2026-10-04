@@ -36,7 +36,7 @@ export const MobilitasIllustration: React.FC<IllustrationProps> = ({
       </defs>
 
       {/* Background with subtle dots */}
-      <rect width="100%" height="100%" fill="url(#mobilitasBg)" rx="16" />
+      <rect width="100%" height="100%" fill="var(--surface-2)" rx="16" />
       <rect width="100%" height="100%" fill="url(#mobilitasDots)" rx="16" />
 
       {/* Decorative ambient glow */}

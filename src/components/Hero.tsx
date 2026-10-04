@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#B71C1C] text-white pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28 min-h-[640px] flex items-center">
+    <section className="relative overflow-hidden bg-[#B71C1C] dark:bg-gradient-to-b dark:from-[#5A0F0F] dark:to-[#240808] text-white pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28 min-h-[640px] flex items-center">
       
       {/* 0. Photo Latar Kampus UPI Bandung (Gedung Isola / Bumi Siliwangi) dengan Filter & Parallax */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
@@ -48,7 +48,7 @@ export const Hero: React.FC = () => {
           loading="eager"
           onError={() => setImgLoaded(false)}
           onLoad={() => setImgLoaded(true)}
-          className={`absolute inset-0 w-full h-[125%] object-cover object-center transition-opacity duration-700 ${
+          className={`absolute inset-0 w-full h-[125%] object-cover object-center transition-opacity duration-700 dark:brightness-[.6] ${
             imgLoaded ? 'opacity-20' : 'opacity-0'
           }`}
           style={{
@@ -57,37 +57,37 @@ export const Hero: React.FC = () => {
           }}
         />
         {/* Brand Overlay Tint (Gradasi Merah - Krem/Emas Halus) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#B71C1C]/80 via-[#D32F2F]/75 to-[#4A0E0E]/90 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#B71C1C]/80 via-[#D32F2F]/75 to-[#4A0E0E]/90 dark:from-[#5A0F0F]/80 dark:via-[#3E0A0A]/75 dark:to-[#240808]/90 mix-blend-multiply" />
         
         {/* Mask gradient memudar halus ke warna background */}
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#B71C1C] via-[#B71C1C]/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#B71C1C] via-[#B71C1C]/70 to-transparent dark:from-[#240808] dark:via-[#240808]/70" />
       </div>
 
       {/* 1. Animated Mesh Gradient Layer (4-5 Large Blurred Blobs moving in smooth loop) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
         {/* Blob 1: Bright Red (#E53935) Top Left */}
         <div
-          className="absolute -top-20 -left-20 w-[480px] h-[480px] rounded-full bg-[#E53935] opacity-85 blur-[90px] animate-hero-blob-1"
+          className="absolute -top-20 -left-20 w-[480px] h-[480px] rounded-full bg-[#E53935] opacity-85 dark:opacity-50 blur-[90px] animate-hero-blob-1"
         />
 
         {/* Blob 2: Primary Red (#D32F2F) Center */}
         <div
-          className="absolute top-1/4 left-1/3 w-[550px] h-[550px] rounded-full bg-[#D32F2F] opacity-75 blur-[100px] animate-hero-blob-2"
+          className="absolute top-1/4 left-1/3 w-[550px] h-[550px] rounded-full bg-[#D32F2F] opacity-75 dark:opacity-45 blur-[100px] animate-hero-blob-2"
         />
 
         {/* Blob 3: Deep Red (#B71C1C) Top Right */}
         <div
-          className="absolute -top-10 right-0 w-[500px] h-[500px] rounded-full bg-[#B71C1C] opacity-80 blur-[85px] animate-hero-blob-3"
+          className="absolute -top-10 right-0 w-[500px] h-[500px] rounded-full bg-[#B71C1C] opacity-80 dark:opacity-50 blur-[85px] animate-hero-blob-3"
         />
 
         {/* Blob 4: Soft Gold Accent (#F2B705) Low Opacity Drift */}
         <div
-          className="absolute top-1/3 right-1/4 w-[360px] h-[360px] rounded-full bg-[#F2B705] opacity-20 blur-[110px] animate-hero-blob-4"
+          className="absolute top-1/3 right-1/4 w-[360px] h-[360px] rounded-full bg-[#F2B705] opacity-20 dark:opacity-12 blur-[110px] animate-hero-blob-4"
         />
 
         {/* Blob 5: Dark Red (#4A0E0E) Bottom Corner */}
         <div
-          className="absolute -bottom-24 -right-24 w-[600px] h-[600px] rounded-full bg-[#4A0E0E] opacity-90 blur-[100px] animate-hero-blob-5"
+          className="absolute -bottom-24 -right-24 w-[600px] h-[600px] rounded-full bg-[#4A0E0E] opacity-90 dark:opacity-55 blur-[100px] animate-hero-blob-5"
         />
 
         {/* Fine Subtle Geometric Grid / Line Texture */}
@@ -195,36 +195,36 @@ export const Hero: React.FC = () => {
             <div className="absolute -bottom-4 right-10 w-4 h-4 rounded-full bg-[#F2B705] shadow-lg shadow-[#F2B705]" />
 
             {/* Floating Mini Card 1: Top Right */}
-            <div className="hidden sm:flex absolute -top-5 -right-4 z-20 bg-white text-neutral-900 py-2 px-3.5 rounded-2xl shadow-xl border border-neutral-100 items-center gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold shrink-0">
+            <div className="hidden sm:flex absolute -top-5 -right-4 z-20 bg-white dark:bg-surface text-neutral-900 dark:text-ink py-2 px-3.5 rounded-2xl shadow-xl dark:shadow-none border border-neutral-100 dark:border-line items-center gap-2.5">
+              <div className="w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0">
                 ✓
               </div>
               <div className="text-left">
-                <div className="text-[11px] font-bold text-neutral-900">Pesanan Masuk</div>
-                <div className="text-[10px] text-neutral-500">Dimsum Gerbang Baru UPI</div>
+                <div className="text-[11px] font-bold text-neutral-900 dark:text-ink">Pesanan Masuk</div>
+                <div className="text-[10px] text-neutral-500 dark:text-ink-muted">Dimsum Gerbang Baru UPI</div>
               </div>
             </div>
 
             {/* Floating Mini Card 2: Bottom Left */}
-            <div className="hidden sm:flex absolute -bottom-5 -left-6 z-20 bg-white text-neutral-900 py-2.5 px-3.5 rounded-2xl shadow-xl border border-neutral-100 items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#FDECEC] text-[#D32F2F] flex items-center justify-center text-xs font-bold shrink-0">
+            <div className="hidden sm:flex absolute -bottom-5 -left-6 z-20 bg-white dark:bg-surface text-neutral-900 dark:text-ink py-2.5 px-3.5 rounded-2xl shadow-xl dark:shadow-none border border-neutral-100 dark:border-line items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-[#FDECEC] dark:bg-accent-tint text-[#D32F2F] dark:text-accent flex items-center justify-center text-xs font-bold shrink-0">
                 RM
               </div>
               <div className="text-left">
-                <div className="text-[11px] font-bold text-neutral-900">Runner Mahasiswa</div>
-                <div className="text-[10px] text-neutral-500">Fahmi (FPEB) • Siap Bantu</div>
+                <div className="text-[11px] font-bold text-neutral-900 dark:text-ink">Runner Mahasiswa</div>
+                <div className="text-[10px] text-neutral-500 dark:text-ink-muted">Fahmi (FPEB) • Siap Bantu</div>
               </div>
             </div>
 
             {/* WhatsApp Chat Window Container */}
-            <div className="w-full max-w-[340px] sm:max-w-[360px] bg-[#075E54] rounded-3xl shadow-2xl overflow-hidden border-2 border-white/20 text-neutral-900">
+            <div className="w-full max-w-[340px] sm:max-w-[360px] bg-[#075E54] dark:bg-[#121B22] rounded-3xl shadow-2xl dark:shadow-none overflow-hidden border-2 border-white/20 dark:border-line text-neutral-900">
               
               {/* WhatsApp Header */}
-              <div className="bg-[#128C7E] px-4 py-3 text-white flex items-center justify-between">
+              <div className="bg-[#128C7E] dark:bg-[#1F2C34] px-4 py-3 text-white flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="relative">
                     <TolongInLogo size={32} />
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#25D366] border-2 border-[#128C7E]" />
+                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#25D366] border-2 border-[#128C7E] dark:border-[#1F2C34]" />
                   </div>
                   <div>
                     <div className="text-xs font-bold leading-tight flex items-center gap-1">
@@ -245,30 +245,30 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Chat Body (WhatsApp subtle background color) */}
-              <div className="bg-[#ECE5DD] p-3.5 space-y-2.5 min-h-[310px] text-xs relative">
+              <div className="bg-[#ECE5DD] dark:bg-wa-canvas p-3.5 space-y-2.5 min-h-[310px] text-xs relative">
                 
                 {/* Time stamp indicator */}
                 <div className="text-center">
-                  <span className="text-[9px] bg-white/70 text-neutral-600 px-2 py-0.5 rounded-full font-medium shadow-2xs">
+                  <span className="text-[9px] bg-white/70 dark:bg-wa-bubble/80 text-neutral-600 dark:text-ink-muted px-2 py-0.5 rounded-full font-medium shadow-2xs">
                     HARI INI
                   </span>
                 </div>
 
-                {/* Message 1 (Customer - Right: Form Pemesanan UPI Tolong) */}
+                {/* Message 1 (Customer - Right: Form Pemesanan Tolong.in) */}
                 <div className="flex justify-end">
-                  <div className="bg-[#DCF8C6] text-neutral-800 p-2.5 rounded-xl rounded-tr-xs shadow-2xs max-w-[90%] text-left text-[11px]">
-                    <div className="font-bold text-[10px] text-neutral-900 border-b border-emerald-300 pb-1 mb-1.5 leading-tight">
-                      FORM PEMESANAN UPI TOLONG
-                      <span className="block font-normal text-[9px] text-neutral-600">Menolong dengan Hati, Melesat Lebih Tinggi</span>
+                  <div className="bg-[#DCF8C6] dark:bg-[#005C4B] text-neutral-800 dark:text-[#E9EDEF] p-2.5 rounded-xl rounded-tr-xs shadow-2xs max-w-[90%] text-left text-[11px]">
+                    <div className="font-bold text-[10px] text-neutral-900 dark:text-white border-b border-emerald-300 dark:border-[#007A65] pb-1 mb-1.5 leading-tight">
+                      FORM PEMESANAN TOLONG.IN
+                      <span className="block font-normal text-[9px] text-neutral-600 dark:text-emerald-100/70">Menolong Dengan Hati</span>
                     </div>
                     <div className="space-y-0.5 text-[10.5px]">
-                      <div><span className="font-medium text-neutral-700">Nama:</span> mamat</div>
-                      <div><span className="font-medium text-neutral-700">Mau ditolong apa:</span> beliin indomie 2 bungkus</div>
-                      <div><span className="font-medium text-neutral-700">Deadline:</span> secepatnya aja</div>
-                      <div><span className="font-medium text-neutral-700">Tujuan:</span> kpad gerlong</div>
-                      <div><span className="font-medium text-neutral-700">Aku mau bayar jasa ini:</span> 1rb</div>
+                      <div><span className="font-medium text-neutral-700 dark:text-emerald-100">Nama:</span> mamat</div>
+                      <div><span className="font-medium text-neutral-700 dark:text-emerald-100">Mau ditolong apa:</span> beliin indomie 2 bungkus</div>
+                      <div><span className="font-medium text-neutral-700 dark:text-emerald-100">Deadline:</span> secepatnya aja</div>
+                      <div><span className="font-medium text-neutral-700 dark:text-emerald-100">Tujuan:</span> kpad gerlong</div>
+                      <div><span className="font-medium text-neutral-700 dark:text-emerald-100">Aku mau bayar jasa ini:</span> 1rb</div>
                     </div>
-                    <div className="flex items-center justify-end gap-1 mt-1 text-[9px] text-neutral-500">
+                    <div className="flex items-center justify-end gap-1 mt-1 text-[9px] text-neutral-500 dark:text-emerald-200/80">
                       <span>11:42</span>
                       <CheckCheck className="w-3 h-3 text-[#34B7F1]" />
                     </div>
@@ -277,11 +277,11 @@ export const Hero: React.FC = () => {
 
                 {/* Message 2 (Admin - Left: Response) */}
                 <div className="flex justify-start">
-                  <div className="bg-white text-neutral-800 p-2.5 rounded-xl rounded-tl-xs shadow-2xs max-w-[88%] text-left text-[11px]">
+                  <div className="bg-white dark:bg-wa-bubble text-neutral-800 dark:text-wa-ink p-2.5 rounded-xl rounded-tl-xs shadow-2xs max-w-[88%] text-left text-[11px]">
                     <p className="leading-snug">
                       Halo Kak Mamat! Siap, total harga dan ongkos jasa sudah disepakati ya. Runner kami (Kak Fahmi) langsung otw beliin indomie-nya yaa 🛵✨
                     </p>
-                    <div className="flex items-center justify-end mt-1 text-[9px] text-neutral-400">
+                    <div className="flex items-center justify-end mt-1 text-[9px] text-neutral-400 dark:text-ink-muted">
                       <span>11:43</span>
                     </div>
                   </div>
@@ -297,7 +297,7 @@ export const Hero: React.FC = () => {
 
                 {/* Watermark Label "ilustrasi" */}
                 <div className="text-center pt-1">
-                  <span className="text-[9px] text-neutral-400 italic">
+                  <span className="text-[9px] text-neutral-400 dark:text-ink-muted italic">
                     (ilustrasi obrolan pemesanan WhatsApp)
                   </span>
                 </div>
@@ -305,8 +305,8 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Chat Bottom Bar Simulation */}
-              <div className="bg-[#F0F0F0] px-3 py-2 flex items-center justify-between border-t border-neutral-200">
-                <span className="text-[11px] text-neutral-400">Ketik pesan untuk admin...</span>
+              <div className="bg-[#F0F0F0] dark:bg-[#1F2C34] px-3 py-2 flex items-center justify-between border-t border-neutral-200 dark:border-line">
+                <span className="text-[11px] text-neutral-400 dark:text-ink-muted">Ketik pesan untuk admin...</span>
                 <a
                   href={WA_LINK}
                   target="_blank"

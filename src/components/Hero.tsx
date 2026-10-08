@@ -4,7 +4,11 @@ import { WA_LINK, BRAND_SLOGAN, BRAND_TAGLINE, HERO_BG_URL } from '../data/conte
 import { TolongInLogo } from './TolongInLogo';
 import { WhatsAppIcon } from './icons/BrandIcons';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onOrderClick?: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onOrderClick }) => {
   const [imgLoaded, setImgLoaded] = useState(true);
   const [scrollY, setScrollY] = useState(0);
 
@@ -117,12 +121,6 @@ export const Hero: React.FC = () => {
           {/* Left Column: Headlines, Trust Chips & CTAs */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-6">
             
-            {/* Campus Pilot Badge with Gold Dot */}
-            <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-black/20 backdrop-blur-md border border-white/20 text-xs font-semibold tracking-wide shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#F2B705] shadow-xs shadow-[#F2B705]" />
-              <span>Pilot Project: Kawasan UPI Bandung & Kos Sekitarnya</span>
-            </div>
-
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.14] text-balance drop-shadow-xs">
               Lagi sibuk? <br />
@@ -156,17 +154,27 @@ export const Hero: React.FC = () => {
 
             {/* Dual CTA Buttons */}
             <div className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              {/* Primary: Pesan via WhatsApp */}
-              <a
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-neutral-100 active:scale-98 text-[#B71C1C] font-extrabold text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2.5 group"
-              >
-                <WhatsAppIcon size={20} className="fill-[#25D366]" />
-                <span>Pesan via WhatsApp</span>
-                <ArrowRight className="w-4 h-4 text-[#B71C1C] group-hover:translate-x-1 transition-transform" />
-              </a>
+              {/* Primary: Pesan Sekarang */}
+              {onOrderClick ? (
+                <button
+                  type="button"
+                  onClick={onOrderClick}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-neutral-100 active:scale-98 text-[#B71C1C] font-extrabold text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2.5 group"
+                >
+                  <WhatsAppIcon size={20} className="fill-[#25D366]" />
+                  <span>Pesan Sekarang</span>
+                  <ArrowRight className="w-4 h-4 text-[#B71C1C] group-hover:translate-x-1 transition-transform" />
+                </button>
+              ) : (
+                <a
+                  href="#pesan"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white hover:bg-neutral-100 active:scale-98 text-[#B71C1C] font-extrabold text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2.5 group"
+                >
+                  <WhatsAppIcon size={20} className="fill-[#25D366]" />
+                  <span>Pesan Sekarang</span>
+                  <ArrowRight className="w-4 h-4 text-[#B71C1C] group-hover:translate-x-1 transition-transform" />
+                </a>
+              )}
 
               {/* Secondary: Lihat Layanan */}
               <a

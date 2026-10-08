@@ -85,7 +85,11 @@ const SHOWCASE_DATA: Record<
   },
 };
 
-export const ServicesSection: React.FC = () => {
+interface ServicesSectionProps {
+  onOrderClick?: () => void;
+}
+
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOrderClick }) => {
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [bgLoaded, setBgLoaded] = useState(true);
   const [displayedReply, setDisplayedReply] = useState('');
@@ -375,15 +379,24 @@ export const ServicesSection: React.FC = () => {
                     <span className="font-bold text-ink block">Ingin pesan layanan ini sekarang?</span>
                     Admin standby membalas dalam hitungan menit tanpa bot kaku.
                   </div>
-                  <a
-                    href={getWaLink(activeService.waTemplate)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="py-2.5 px-5 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2 whitespace-nowrap cursor-pointer active:scale-95 shrink-0"
-                  >
-                    <Send className="w-3.5 h-3.5 fill-white" />
-                    <span>Chat Admin Sekarang</span>
-                  </a>
+                  {onOrderClick ? (
+                    <button
+                      type="button"
+                      onClick={onOrderClick}
+                      className="py-2.5 px-5 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2 whitespace-nowrap cursor-pointer active:scale-95 shrink-0"
+                    >
+                      <Send className="w-3.5 h-3.5 fill-white" />
+                      <span>Pesan Sekarang</span>
+                    </button>
+                  ) : (
+                    <a
+                      href="#pesan"
+                      className="py-2.5 px-5 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2 whitespace-nowrap cursor-pointer active:scale-95 shrink-0"
+                    >
+                      <Send className="w-3.5 h-3.5 fill-white" />
+                      <span>Pesan Sekarang</span>
+                    </a>
+                  )}
                 </div>
 
               </div>
@@ -443,18 +456,28 @@ export const ServicesSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Bottom WhatsApp Button for this specific service */}
+                  {/* Bottom Order Button for this specific service */}
                   <div className="pt-2">
-                    <a
-                      href={getWaLink(svc.waTemplate)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-3 px-4 rounded-full bg-neutral-900 dark:bg-surface-2 dark:border dark:border-line group-hover:bg-[#E53935] text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98"
-                    >
-                      <MessageCircle className="w-4 h-4 fill-white" />
-                      <span>Pesan Layanan Ini via WA</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                    {onOrderClick ? (
+                      <button
+                        type="button"
+                        onClick={onOrderClick}
+                        className="w-full py-3 px-4 rounded-full bg-neutral-900 dark:bg-surface-2 dark:border dark:border-line group-hover:bg-[#E53935] text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98"
+                      >
+                        <MessageCircle className="w-4 h-4 fill-white" />
+                        <span>Pesan Sekarang</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    ) : (
+                      <a
+                        href="#pesan"
+                        className="w-full py-3 px-4 rounded-full bg-neutral-900 dark:bg-surface-2 dark:border dark:border-line group-hover:bg-[#E53935] text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98"
+                      >
+                        <MessageCircle className="w-4 h-4 fill-white" />
+                        <span>Pesan Sekarang</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               );

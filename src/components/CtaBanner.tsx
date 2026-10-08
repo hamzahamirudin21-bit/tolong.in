@@ -2,7 +2,11 @@ import React from 'react';
 import { MessageCircle, ArrowRight, Heart } from 'lucide-react';
 import { WA_LINK, BRAND_TAGLINE } from '../data/contentData';
 
-export const CtaBanner: React.FC = () => {
+interface CtaBannerProps {
+  onOrderClick?: () => void;
+}
+
+export const CtaBanner: React.FC<CtaBannerProps> = ({ onOrderClick }) => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-[#E53935] via-[#D32F2F] to-[#B71C1C] dark:from-[#9B1B1B] dark:via-[#7F1717] dark:to-[#5E1010] text-white py-14 md:py-20 border-b border-transparent dark:border-line">
       {/* Decorative background shapes */}
@@ -26,16 +30,26 @@ export const CtaBanner: React.FC = () => {
         </p>
 
         <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-9 py-4 rounded-full bg-white hover:bg-neutral-100 active:scale-98 text-[#B71C1C] font-extrabold text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2.5 group"
-          >
-            <MessageCircle className="w-5 h-5 fill-[#25D366] text-white" />
-            <span>Pesan via WhatsApp</span>
-            <ArrowRight className="w-4 h-4 text-[#B71C1C] group-hover:translate-x-1 transition-transform" />
-          </a>
+          {onOrderClick ? (
+            <button
+              type="button"
+              onClick={onOrderClick}
+              className="w-full sm:w-auto px-9 py-4 rounded-full bg-white hover:bg-neutral-100 active:scale-98 text-[#B71C1C] font-extrabold text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2.5 group"
+            >
+              <MessageCircle className="w-5 h-5 fill-[#25D366] text-white" />
+              <span>Pesan Sekarang</span>
+              <ArrowRight className="w-4 h-4 text-[#B71C1C] group-hover:translate-x-1 transition-transform" />
+            </button>
+          ) : (
+            <a
+              href="#pesan"
+              className="w-full sm:w-auto px-9 py-4 rounded-full bg-white hover:bg-neutral-100 active:scale-98 text-[#B71C1C] font-extrabold text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer flex items-center justify-center gap-2.5 group"
+            >
+              <MessageCircle className="w-5 h-5 fill-[#25D366] text-white" />
+              <span>Pesan Sekarang</span>
+              <ArrowRight className="w-4 h-4 text-[#B71C1C] group-hover:translate-x-1 transition-transform" />
+            </a>
+          )}
         </div>
       </div>
     </section>

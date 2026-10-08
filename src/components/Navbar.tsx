@@ -5,7 +5,11 @@ import { WhatsAppIcon } from './icons/BrandIcons';
 import { ThemeToggle } from './ThemeToggle';
 import { WA_LINK, WA_DISPLAY, BRAND_TAGLINE } from '../data/contentData';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onOrderClick?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOrderClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -91,47 +95,79 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right Action: ThemeToggle & Pill Button Pesan via WhatsApp */}
+          {/* Right Action: ThemeToggle & Pill Button Pesan Sekarang */}
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle variant="navbar" onHero={!isScrolled} />
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`rounded-full font-bold text-xs xl:text-sm py-2.5 px-5 shadow-xs hover:shadow-md transition-all flex items-center gap-2 group cursor-pointer active:scale-95 ${
-                isScrolled
-                  ? 'bg-[#E53935] hover:bg-[#B71C1C] text-white'
-                  : 'bg-white hover:bg-neutral-100 text-[#B71C1C] shadow-lg'
-              }`}
-            >
-              <WhatsAppIcon
-                size={18}
-                className={isScrolled ? 'fill-white text-white' : 'fill-[#25D366] text-[#25D366]'}
-              />
-              <span>Pesan via WhatsApp</span>
-            </a>
+            {onOrderClick ? (
+              <button
+                type="button"
+                onClick={onOrderClick}
+                className={`rounded-full font-bold text-xs xl:text-sm py-2.5 px-5 shadow-xs hover:shadow-md transition-all flex items-center gap-2 group cursor-pointer active:scale-95 ${
+                  isScrolled
+                    ? 'bg-[#E53935] hover:bg-[#B71C1C] text-white'
+                    : 'bg-white hover:bg-neutral-100 text-[#B71C1C] shadow-lg'
+                }`}
+              >
+                <WhatsAppIcon
+                  size={18}
+                  className={isScrolled ? 'fill-white text-white' : 'fill-[#25D366] text-[#25D366]'}
+                />
+                <span>Pesan Sekarang</span>
+              </button>
+            ) : (
+              <a
+                href="#pesan"
+                className={`rounded-full font-bold text-xs xl:text-sm py-2.5 px-5 shadow-xs hover:shadow-md transition-all flex items-center gap-2 group cursor-pointer active:scale-95 ${
+                  isScrolled
+                    ? 'bg-[#E53935] hover:bg-[#B71C1C] text-white'
+                    : 'bg-white hover:bg-neutral-100 text-[#B71C1C] shadow-lg'
+                }`}
+              >
+                <WhatsAppIcon
+                  size={18}
+                  className={isScrolled ? 'fill-white text-white' : 'fill-[#25D366] text-[#25D366]'}
+                />
+                <span>Pesan Sekarang</span>
+              </a>
+            )}
           </div>
 
           {/* Mobile Right: ThemeToggle, WA, & Hamburger Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle variant="navbar" onHero={!isScrolled} />
 
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`py-1.5 px-3 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-xs ${
-                isScrolled
-                  ? 'bg-[#E53935] text-white'
-                  : 'bg-white text-[#B71C1C]'
-              }`}
-            >
-              <WhatsAppIcon
-                size={14}
-                className={isScrolled ? 'fill-white' : 'fill-[#25D366]'}
-              />
-              <span>Chat WA</span>
-            </a>
+            {onOrderClick ? (
+              <button
+                type="button"
+                onClick={onOrderClick}
+                className={`py-1.5 px-3 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer ${
+                  isScrolled
+                    ? 'bg-[#E53935] text-white'
+                    : 'bg-white text-[#B71C1C]'
+                }`}
+              >
+                <WhatsAppIcon
+                  size={14}
+                  className={isScrolled ? 'fill-white' : 'fill-[#25D366]'}
+                />
+                <span>Pesan Sekarang</span>
+              </button>
+            ) : (
+              <a
+                href="#pesan"
+                className={`py-1.5 px-3 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-xs ${
+                  isScrolled
+                    ? 'bg-[#E53935] text-white'
+                    : 'bg-white text-[#B71C1C]'
+                }`}
+              >
+                <WhatsAppIcon
+                  size={14}
+                  className={isScrolled ? 'fill-white' : 'fill-[#25D366]'}
+                />
+                <span>Pesan Sekarang</span>
+              </a>
+            )}
 
             <button
               type="button"
@@ -171,16 +207,29 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Direct WhatsApp CTA Button */}
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
-            >
-              <WhatsAppIcon size={20} className="fill-white" />
-              <span>Pesan Sekarang via WhatsApp</span>
-            </a>
+            {/* Direct Order CTA Button */}
+            {onOrderClick ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOrderClick();
+                }}
+                className="w-full py-3.5 px-5 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
+              >
+                <WhatsAppIcon size={20} className="fill-white" />
+                <span>Pesan Sekarang</span>
+              </button>
+            ) : (
+              <a
+                href="#pesan"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3.5 px-5 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
+              >
+                <WhatsAppIcon size={20} className="fill-white" />
+                <span>Pesan Sekarang</span>
+              </a>
+            )}
 
             {/* Navigation links */}
             <div className="border-t border-line pt-3 space-y-1">

@@ -96,7 +96,9 @@ export interface ServiceCategory {
 
 export interface OrderFormData {
   nama: string;
-  fakultasAngkatan: string;
+  fakultas: string;
+  angkatan: string;
+  fakultasAngkatan?: string; // backward compatibility
   noWa: string;
   mauDitolongApa: string;
   deadline: string;
@@ -107,11 +109,15 @@ export interface OrderFormData {
 }
 
 export const formatTolongInOrderMessage = (data: Partial<OrderFormData>): string => {
+  const fakultasDisplay = data.fakultas || data.fakultasAngkatan || '-';
+  const angkatanDisplay = data.angkatan || '-';
+
   return `FORM PEMESANAN TOLONG.IN
 Menolong dengan Hati, Melesat Lebih Tinggi
 
 Nama: ${data.nama || ''}
-Fakultas & Angkatan: ${data.fakultasAngkatan || ''}
+Fakultas / Prodi: ${fakultasDisplay}
+Angkatan: ${angkatanDisplay}
 No. WhatsApp: ${data.noWa || ''}
 
 Mau ditolong apa: ${data.mauDitolongApa || ''}

@@ -49,7 +49,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome }) => {
   // Form state
   const [formData, setFormData] = useState<OrderFormData>({
     nama: '',
-    fakultasAngkatan: '',
+    fakultas: '',
+    angkatan: '',
     noWa: '',
     mauDitolongApa: 'Beliin dimsum gerbang UPI 2 porsi',
     deadline: 'secepatnya aja',
@@ -95,7 +96,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome }) => {
   const loadExample = () => {
     setFormData({
       nama: 'Mamat',
-      fakultasAngkatan: 'FPMIPA 23',
+      fakultas: 'FPMIPA',
+      angkatan: '2023',
       noWa: '+62 895-3217-48547',
       mauDitolongApa: 'Beliin makan siang nasi padang ayam gulai + es teh',
       deadline: 'Sebelum jam 12.30',
@@ -113,7 +115,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome }) => {
   const handleReset = () => {
     setFormData({
       nama: '',
-      fakultasAngkatan: '',
+      fakultas: '',
+      angkatan: '',
       noWa: '',
       mauDitolongApa: '',
       deadline: 'secepatnya aja',
@@ -127,7 +130,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome }) => {
 
   const formattedWhatsAppText = formatTolongInOrderMessage({
     nama: formData.nama.trim() || '(Nama Pemesan)',
-    fakultasAngkatan: formData.fakultasAngkatan.trim() || '-',
+    fakultas: formData.fakultas.trim() || '-',
+    angkatan: formData.angkatan.trim() || '-',
     noWa: formData.noWa.trim() || '-',
     mauDitolongApa: formData.mauDitolongApa.trim() || '(Rincian Pesanan)',
     deadline: formData.deadline.trim() || 'secepatnya aja',
@@ -777,19 +781,35 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome }) => {
                     </div>
                   </div>
 
-                  {/* Row 2: Fakultas & Angkatan */}
-                  <div>
-                    <label className="text-xs font-bold text-ink-soft mb-1 flex items-center justify-between">
-                      <span>Fakultas & Angkatan / Status</span>
-                      <span className="text-[10px] text-ink-muted font-normal">Opsional</span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Contoh: FPMIPA 23 / Mahasiswa Baru / Umum"
-                      value={formData.fakultasAngkatan}
-                      onChange={(e) => handleInputChange('fakultasAngkatan', e.target.value)}
-                      className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
-                    />
+                  {/* Row 2: Fakultas & Angkatan (Kolom Terpisah) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                      <label className="text-xs font-bold text-ink-soft mb-1 flex items-center justify-between">
+                        <span>Fakultas / Prodi</span>
+                        <span className="text-[10px] text-ink-muted font-normal">Opsional</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Contoh: FPMIPA / Fisika"
+                        value={formData.fakultas}
+                        onChange={(e) => handleInputChange('fakultas', e.target.value)}
+                        className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold text-ink-soft mb-1 flex items-center justify-between">
+                        <span>Angkatan</span>
+                        <span className="text-[10px] text-ink-muted font-normal">Tahun / Status</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Contoh: 2023 / 25 / Dosen"
+                        value={formData.angkatan}
+                        onChange={(e) => handleInputChange('angkatan', e.target.value)}
+                        className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
+                      />
+                    </div>
                   </div>
 
                   {/* Row 3: Mau Ditolong Apa */}
@@ -950,7 +970,8 @@ export const OrderPage: React.FC<OrderPageProps> = ({ onBackToHome }) => {
 
                     <div className="space-y-1 pt-1 font-mono text-[11px] leading-relaxed">
                       <p><strong>Nama:</strong> {formData.nama.trim() || 'Mamat'}</p>
-                      <p><strong>Fakultas & Angkatan:</strong> {formData.fakultasAngkatan.trim() || '-'}</p>
+                      <p><strong>Fakultas / Prodi:</strong> {formData.fakultas.trim() || '-'}</p>
+                      <p><strong>Angkatan:</strong> {formData.angkatan.trim() || '-'}</p>
                       <p><strong>No. WhatsApp:</strong> {formData.noWa.trim() || '-'}</p>
                       <div className="h-px bg-black/10 dark:bg-white/10 my-1" />
                       <p><strong>Mau ditolong apa:</strong> {formData.mauDitolongApa.trim() || '(Rincian bantuan)'}</p>

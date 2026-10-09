@@ -5,7 +5,8 @@ import { WA_NUMBER, formatTolongInOrderMessage, OrderFormData } from '../data/co
 export const QuickOrderForm: React.FC = () => {
   const [formData, setFormData] = useState<OrderFormData>({
     nama: '',
-    fakultasAngkatan: '',
+    fakultas: '',
+    angkatan: '',
     noWa: '',
     mauDitolongApa: '',
     deadline: '',
@@ -21,7 +22,8 @@ export const QuickOrderForm: React.FC = () => {
   // Default display fallbacks matching the WhatsApp form reference
   const displayData: OrderFormData = {
     nama: formData.nama.trim() || 'mamat',
-    fakultasAngkatan: formData.fakultasAngkatan.trim() || 'fisika 25',
+    fakultas: formData.fakultas.trim() || 'Fisika',
+    angkatan: formData.angkatan.trim() || '25',
     noWa: formData.noWa.trim() || '+62 895-3217-48547',
     mauDitolongApa: formData.mauDitolongApa.trim() || 'beliin indomie 2 bungkus',
     deadline: formData.deadline.trim() || 'secepatnya aja',
@@ -42,7 +44,8 @@ export const QuickOrderForm: React.FC = () => {
   const loadExample = () => {
     setFormData({
       nama: 'mamat',
-      fakultasAngkatan: 'fisika 25',
+      fakultas: 'Fisika',
+      angkatan: '25',
       noWa: '+62 895-3217-48547',
       mauDitolongApa: 'beliin indomie 2 bungkus',
       deadline: 'secepatnya aja',
@@ -57,7 +60,8 @@ export const QuickOrderForm: React.FC = () => {
   const handleReset = () => {
     setFormData({
       nama: '',
-      fakultasAngkatan: '',
+      fakultas: '',
+      angkatan: '',
       noWa: '',
       mauDitolongApa: '',
       deadline: '',
@@ -71,7 +75,8 @@ export const QuickOrderForm: React.FC = () => {
 
   const formattedWhatsAppText = formatTolongInOrderMessage({
     nama: formData.nama.trim() || displayData.nama,
-    fakultasAngkatan: formData.fakultasAngkatan.trim() || displayData.fakultasAngkatan,
+    fakultas: formData.fakultas.trim() || displayData.fakultas,
+    angkatan: formData.angkatan.trim() || displayData.angkatan,
     noWa: formData.noWa.trim() || displayData.noWa,
     mauDitolongApa: formData.mauDitolongApa.trim() || displayData.mauDitolongApa,
     deadline: formData.deadline.trim() || displayData.deadline,
@@ -149,7 +154,7 @@ export const QuickOrderForm: React.FC = () => {
 
             <form onSubmit={handleSendWhatsApp} className="space-y-4">
               
-              {/* Row 1: Nama & Fakultas/Angkatan */}
+              {/* Row 1: Nama Pemesan & No. WhatsApp */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold text-ink-soft mb-1.5 flex items-center justify-between">
@@ -171,32 +176,48 @@ export const QuickOrderForm: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-ink-soft mb-1.5 flex items-center justify-between">
-                    <span>Fakultas & Angkatan</span>
-                    <span className="text-[10px] text-ink-muted font-normal">atau Umum/Dosen</span>
+                  <label className="block text-xs font-bold text-ink-soft mb-1.5">
+                    No. WhatsApp Pemesan
                   </label>
                   <input
                     type="text"
-                    placeholder="Contoh: fisika 25 / FPMIPA 23"
-                    value={formData.fakultasAngkatan}
-                    onChange={(e) => handleInputChange('fakultasAngkatan', e.target.value)}
+                    placeholder="Contoh: +62 895-3217-48547 / 0895321748547"
+                    value={formData.noWa}
+                    onChange={(e) => handleInputChange('noWa', e.target.value)}
                     className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
                   />
                 </div>
               </div>
 
-              {/* Row 2: No. WhatsApp */}
-              <div>
-                <label className="block text-xs font-bold text-ink-soft mb-1.5">
-                  No. WhatsApp Pemesan
-                </label>
-                <input
-                  type="text"
-                  placeholder="Contoh: +62 895-3217-48547 / 0895321748547"
-                  value={formData.noWa}
-                  onChange={(e) => handleInputChange('noWa', e.target.value)}
-                  className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
-                />
+              {/* Row 2: Fakultas & Angkatan (Kolom Terpisah) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-bold text-ink-soft mb-1.5 flex items-center justify-between">
+                    <span>Fakultas / Prodi</span>
+                    <span className="text-[10px] text-ink-muted font-normal">atau Umum/Dosen</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Fisika / FPMIPA"
+                    value={formData.fakultas}
+                    onChange={(e) => handleInputChange('fakultas', e.target.value)}
+                    className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-ink-soft mb-1.5 flex items-center justify-between">
+                    <span>Angkatan</span>
+                    <span className="text-[10px] text-ink-muted font-normal">Contoh: 2025 / 23</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: 25 / 2023"
+                    value={formData.angkatan}
+                    onChange={(e) => handleInputChange('angkatan', e.target.value)}
+                    className="w-full text-xs sm:text-sm py-2.5 px-3.5 bg-field border border-line-strong rounded-xl focus:border-accent focus:ring-1 focus:ring-accent outline-hidden text-ink placeholder:text-ink-muted"
+                  />
+                </div>
               </div>
 
               {/* Row 3: Mau Ditolong Apa (Required) */}
@@ -372,9 +393,15 @@ export const QuickOrderForm: React.FC = () => {
                     <span className="font-medium text-wa-ink">Nama:</span>{' '}
                     <span className="text-wa-ink">{displayData.nama}</span>
                   </div>
-                  <div>
-                    <span className="font-medium text-wa-ink">Fakultas & Angkatan:</span>{' '}
-                    <span className="text-wa-ink">{displayData.fakultasAngkatan}</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1">
+                    <div>
+                      <span className="font-medium text-wa-ink">Fakultas / Prodi:</span>{' '}
+                      <span className="text-wa-ink">{displayData.fakultas}</span>
+                    </div>
+                    <div>
+                      <span className="font-medium text-wa-ink">Angkatan:</span>{' '}
+                      <span className="text-wa-ink">{displayData.angkatan}</span>
+                    </div>
                   </div>
                   <div>
                     <span className="font-medium text-wa-ink">No. WhatsApp:</span>{' '}

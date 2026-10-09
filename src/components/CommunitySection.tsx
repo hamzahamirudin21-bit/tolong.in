@@ -224,12 +224,12 @@ export const CommunitySection: React.FC = () => {
           </div>
 
           {/* Ajakan Kolaborasi Banner */}
-          <div className="bg-surface rounded-2xl p-6 border border-line flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left mt-8">
-            <div>
-              <h4 className="text-sm font-bold text-ink">
+          <div className="bg-surface rounded-2xl p-6 sm:p-8 border border-line flex flex-col items-center justify-center text-center gap-4 mt-8">
+            <div className="max-w-xl mx-auto space-y-2">
+              <h4 className="text-sm sm:text-base font-bold text-ink">
                 Punya UMKM di sekitar kampus atau organisasi mahasiswa yang ingin bekerja sama?
               </h4>
-              <p className="text-xs text-ink-soft mt-0.5">
+              <p className="text-xs sm:text-sm text-ink-soft leading-relaxed">
                 Kami siap menjadi mitra logistik acara, kurir pesanan toko, atau saluran publikasi kegiatan positifmu.
               </p>
             </div>
@@ -237,7 +237,7 @@ export const CommunitySection: React.FC = () => {
               href={collabWaLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-3 px-6 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white text-xs font-bold transition-all shadow-xs whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer shrink-0"
+              className="py-3 px-6 sm:px-8 rounded-full bg-[#E53935] hover:bg-[#B71C1C] text-white text-xs sm:text-sm font-bold transition-all shadow-xs hover:shadow-md whitespace-nowrap inline-flex items-center justify-center gap-2 cursor-pointer mt-1"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>Ajak Kolaborasi ke WhatsApp</span>
